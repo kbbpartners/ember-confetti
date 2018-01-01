@@ -75,6 +75,8 @@ export default Ember.Component.extend({
   tagName: 'canvas',
   attributeBindings: ['style'],
 
+  isEnabled: true,
+
   style: computed(function() {
     return Ember.String.htmlSafe(`
       pointer-events: none;
@@ -179,7 +181,7 @@ export default Ember.Component.extend({
   },
 
   animationLoop() {
-    if (this.isDestroyed || this.isDestroying) {
+    if (this.isDestroyed || this.isDestroying || !this.get('isEnabled')) {
       return;
     }
 
