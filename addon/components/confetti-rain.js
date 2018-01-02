@@ -146,7 +146,9 @@ export default Ember.Component.extend({
     for (var i = 0; i < MAX_PARTICLES; i++) {
       particle = this.get('particles')[i];
       this.stepParticle(particle, i);
-      this.checkForReposition(particle, i);
+      if (this.get('isEnabled')) {
+        this.checkForReposition(particle, i);
+      }
     }
   },
 
@@ -181,7 +183,7 @@ export default Ember.Component.extend({
   },
 
   animationLoop() {
-    if (this.isDestroyed || this.isDestroying || !this.get('isEnabled')) {
+    if (this.isDestroyed || this.isDestroying ) {
       return;
     }
 
